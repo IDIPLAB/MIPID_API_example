@@ -24,6 +24,8 @@ dev_mode：相信你们发给我的 exe 已经通过了自己的测试，但在�
 
 ## 测试平台
 
+<img src="https://raw.githubusercontent.com/Sandiagal/MIPID_API_example/master/images/example.png" width="50%" >
+
 已经包含所有运行库，只要是符合接口源码模式的`exe`都能用该平台进行测试。
 
 应该具备了足够的自明性，先不详细介绍了。
