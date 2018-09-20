@@ -26,8 +26,13 @@ limitations under the License.
 // Solution::parser 用于对命令行模式下的参数进行解析，已经包含了常见的数据结构的
 // 操作范例。Solution::algorithm 和 Solution::output 是算法的主体和输出，已经基于
 // "LeetCode 9 回文数"做出了算法级范例。题目为：判断一个整数是否是回文数。回文数
-// 是指正序（从左向右）和倒序（从右向左）读都是一样的整数。例121是回文数，-121不是。
+// 是指正序（从左向右）和倒序（从右向左）读都是一样的整数。例121是回文数,-121不是。
 //
+// 请在 Solution::parser 中填写完整的说明文档。包括你的接口叫什么，我该为该接口分
+// 配什么按钮，比如“边缘检测”。必要和可选参数是什么，是什么数据类型，我该怎么调
+// 用，比如“-i,--image string 图像路径”。你的接口产生了什么输出，是直接返回的string，
+// 比如“bool 是否为回文数”；还是生成了新文件，比如“1.jpg 生成的图片”。
+
 // Debug：该接口需要外部输入参数，你可以使用编译器的"命令参数"来模拟输入。该设置
 // 在MSVC2015中位于项目属性页的“调试”中。注意 C++ 11 标准会用空格分割字符串，请
 // 不要使用带空格的路径的文件名。在必要时请用"image size"的方式保护空格。最后发给
@@ -109,16 +114,24 @@ int Solution::parser( int argc, char* argv[] ) {
 	// ==============================================================================
 	// 请设置说明文档。
 	if( argc < 3 ) { // 输入参数数量不足时，输出使用说明。
-		std::cout << "Usage: " << argv[0] << " -n,-number <int>" << std::endl
+		std::cout << "MIPID API接口范例。以'LeetCode 9 回文数'为例说明了如何编写\
+接口。以下参数中'Mandatory'必须包含，是待判断的回文数。'Optional'是其他类型参数的\
+输入范例，在本范例中实际作用。'Output'是调用接口返回的直接输出。'Files'是接口生成\
+的文件。" << std::endl
+			<< "Usage: " << argv[0] << " -n,-number <int>" << std::endl
 			<< "Mandatory:" << std::endl
-			<< "\t-n,-number\t\t输入数字" << std::endl
+			<< "\t-n,-number\tint\t输入数字" << std::endl
 			<< "Optional:" << std::endl
-			<< "\t-i,--image\t\t图像路径" << std::endl
-			<< "\t-iw,--input_width\t缩放到该像素宽" << std::endl
-			<< "\t-im,--input_mean\t缩放到该像素均值" << std::endl
-			<< "\t-is,--input_std\t\t缩放到该像素标准差" << std::endl
-			<< "\t-st,--self_test\t\t进行自我检测" << std::endl
-			<< "\t-dm,--dev_mode\t\t开发模式" << std::endl;
+			<< "\t-i,--image\t\tstring\t\t\t图像路径" << std::endl
+			<< "\t-iw,--input_width\tint\t\t\t缩放到该像素宽" << std::endl
+			<< "\t-im,--input_mean\tint,float,'int,int,...'\t缩放到该像素均值" << std::endl
+			<< "\t-is,--input_std\t\tint,float,'int,int,...'\t缩放到该像素标准差" << std::endl
+			<< "\t-st,--self_test\t\tbool\t\t\t进行自我检测" << std::endl
+			<< "\t-dm,--dev_mode\t\tbool\t\t\t开发模式" << std::endl
+			<< "Output:" << std::endl
+			<< "\tbool\t是否为回文数" << std::endl
+			<< "Files:" << std::endl
+			<< "\t1.jpg\t生成的图片" << std::endl;
 		// ==============================================================================
 
 		std::cin.get();
@@ -165,17 +178,17 @@ int Solution::parser( int argc, char* argv[] ) {
 		// ==============================================================================
 		std::cout << "Usage: " << argv[0] << std::endl
 			<< "Argments:" << std::endl
-			<< "\t--number=" << number << "\t\t" << "int\t" << "判断该整数是否是回文数" << std::endl
-			<< "\t--image=\"" << image << "\"\t\t" << "string\t" << "图像路径" << std::endl
-			<< "\t--input_width=" << input_width << "\t\t" << "int\t" << "缩放到该像素宽" << std::endl
-			<< "\t--input_mean=" << input_mean << "\t\t" << "float\t" << "缩放到该像素均值" << std::endl;
+			<< "\t--number=" << number << "\tint\t判断该整数是否是回文数" << std::endl
+			<< "\t--image=\"" << image << "\"\tstring\t图像路径" << std::endl
+			<< "\t--input_width=" << input_width << "\tint\t缩放到该像素宽" << std::endl
+			<< "\t--input_mean=" << input_mean << "\tfloat\t缩放到该像素均值" << std::endl;
 
 		for( int i = 0; i < input_std.size(); i++ ) {
-			std::cout << "\t--input_std" << i << "=" << input_std.at( i ) << "\t\t" << "vector<float>\t" << "缩放到该像素标准差" << std::endl;
+			std::cout << "\t--input_std" << i << "=" << input_std.at( i ) << "\tvector<float>\t缩放到该像素标准差" << std::endl;
 		}
 
-		std::cout << "\t--self_test=" << self_test << "\t\t" << "bool\t" << "进行自我检测" << std::endl
-			<< "\t--dev_mode=" << dev_mode << "\t\t" << "bool\t" << "开发模式" << std::endl;
+		std::cout << "\t--self_test=" << self_test << "\tbool\t进行自我检测" << std::endl
+			<< "\t--dev_mode=" << dev_mode << "\tbool\t开发模式" << std::endl;
 		// ==============================================================================
 	}
 
@@ -241,6 +254,8 @@ int Solution::output() {
 
 
 	// ==============================================================================
+
+	std::cout << "MIPID_API_example runs successfully." << std::endl;
 
 	return 0;
 }
